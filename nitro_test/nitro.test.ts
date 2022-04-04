@@ -26,6 +26,16 @@ chai.use(solidity);
 
 describe('Nitro', async () => {
   
+    it.skip('Send a lot of Txs', async () => {
+      const [ signer ] = await ethers.getSigners();
+      const tasks = [];
+      for (let i = 0; i < 1000; i++) {
+        if(i%10 == 0) process.stdout.write(".");
+        await signer.sendTransaction({to: signer.address})
+      }
+      console.log('')
+    })
+
     it('Can Deploy NitroTest', async () => {
       const [ signer ] = await ethers.getSigners();
       
